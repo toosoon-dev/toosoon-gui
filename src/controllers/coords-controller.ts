@@ -1,5 +1,5 @@
-import { createCanvas } from 'toosoon-utils/lib/dom';
-import { clamp, map, roundTo } from 'toosoon-utils/lib/maths';
+import { createCanvas } from 'toosoon-utils/dom';
+import { clamp, map, roundTo } from 'toosoon-utils/maths';
 
 import GUI from '../gui';
 import GUIController from './controller';

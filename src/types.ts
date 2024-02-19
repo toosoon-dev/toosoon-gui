@@ -1,6 +1,6 @@
 import GUIController from './controllers/controller';
 import GUI from './gui';
-import GUIWrapper, { GUIControllerWrapper } from './wrapper';
+import { GUIControllerWrapper, GUIWrapper } from './wrapper';
 
 export type Gui = GUI | GUIWrapper;
 

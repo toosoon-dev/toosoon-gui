@@ -1,4 +1,4 @@
-import { hexToRgb, normalizeHexString, rgbToHexString } from 'toosoon-utils/lib/colors';
+import { hexToRgb, normalizeHexString, rgbToHexString } from 'toosoon-utils/colors';
 
 import GUI from '../gui';
 import GUIController from './controller';

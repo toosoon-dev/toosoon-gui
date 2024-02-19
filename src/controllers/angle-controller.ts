@@ -1,7 +1,7 @@
-import { PI, TWO_PI } from 'toosoon-utils/lib/constants';
-import { createCanvas } from 'toosoon-utils/lib/dom';
-import { angle } from 'toosoon-utils/lib/geometry';
-import { roundTo } from 'toosoon-utils/lib/maths';
+import { PI, TWO_PI } from 'toosoon-utils/constants';
+import { createCanvas } from 'toosoon-utils/dom';
+import { angle } from 'toosoon-utils/geometry';
+import { roundTo } from 'toosoon-utils/maths';
 
 import GUI from '../gui';
 import GUIController from './controller';

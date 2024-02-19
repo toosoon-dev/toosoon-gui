@@ -76,7 +76,7 @@ export class GUIControllerWrapper {
   public destroy() {}
 }
 
-export default class GUIWrapper {
+export class GUIWrapper {
   static GUIControllerWrapper = new GUIControllerWrapper();
   readonly root!: GUI;
   readonly children: Array<GUI | GUIController> = [];

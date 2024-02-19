@@ -1,5 +1,5 @@
-import { EPSILON } from 'toosoon-utils/lib/constants';
-import { clamp, map, roundTo } from 'toosoon-utils/lib/maths';
+import { EPSILON } from 'toosoon-utils/constants';
+import { clamp, map, roundTo } from 'toosoon-utils/maths';
 
 import GUI from '../gui';
 import GUIController from './controller';

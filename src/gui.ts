@@ -1,4 +1,4 @@
-import { injectStyles } from 'toosoon-utils/lib/dom';
+import { injectStyles } from 'toosoon-utils/dom';
 
 import AngleController from './controllers/angle-controller';
 import BooleanController from './controllers/boolean-controller';

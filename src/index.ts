@@ -8,7 +8,7 @@ export { default as NumberController } from './controllers/number-controller';
 export { default as OptionController } from './controllers/option-controller';
 export { default as StringController } from './controllers/string-controller';
 
-export { GUIControllerWrapper, default as GUIWrapper } from './wrapper';
+export { GUIControllerWrapper, GUIWrapper } from './wrapper';
 
 export type * from './types';
 
