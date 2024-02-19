@@ -1,0 +1,30 @@
+{
+  "name": "toosoon-gui",
+  "version": "1.0.0",
+  "description": "Controller library",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toosoon-dev/toosoon-gui.git"
+  },
+  "keywords": [
+    "toosoon",
+    "gui"
+  ],
+  "author": "Arnaud Rocca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toosoon-dev/toosoon-gui/issues"
+  },
+  "homepage": "https://github.com/toosoon-dev/toosoon-gui#readme",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "toosoon-utils": "^1.0.3"
+  }
+}
