@@ -10,7 +10,7 @@ import FunctionController from './controllers/function-controller';
 import NumberController from './controllers/number-controller';
 import OptionController from './controllers/option-controller';
 import StringController from './controllers/string-controller';
-import stylesheet from './styles/gui';
+import stylesheet from './stylesheet';
 import { GUIData, GUIOnChangeCallback } from './types';
 
 /**
