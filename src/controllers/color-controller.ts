@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { hexToRgb, normalizeHexString, rgbToHexString } from 'toosoon-utils/lib/colors';
 
 import GUI from '../gui';

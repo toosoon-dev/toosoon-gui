@@ -1,7 +1,7 @@
-import { InputChangeEvent } from '@/data/types';
-
 import GUI from '../gui';
 import GUIController from './controller';
+
+type InputChangeEvent = Event & { target: (EventTarget & { files?: FileList }) | null };
 
 /**
  * GUI Controller for files

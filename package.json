@@ -1,6 +1,6 @@
 {
   "name": "toosoon-gui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Controller library",
   "main": "./lib/index.js",
   "scripts": {

@@ -318,7 +318,7 @@ export default class NumberController extends GUIController<number> {
     const WHEEL_DEBOUNCE_TIME = 400;
     const callOnFinishChange = this.callOnFinishChange.bind(this);
 
-    let wheelFinishChangeTimeout: NodeJS.Timeout;
+    let wheelFinishChangeTimeout: number;
 
     const onWheel = (event: WheelEvent) => {
       const isVertical = Math.abs(event.deltaX) < Math.abs(event.deltaY);

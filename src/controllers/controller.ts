@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import GUI from '../gui';
 import { GUIControllerOnChangeCallback } from '../types';
 
