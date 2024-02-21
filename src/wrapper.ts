@@ -1,6 +1,6 @@
 import GUIController from './controllers/controller';
 import GUI from './gui';
-import { GUIControllerOnChangeCallback, GUIData, GUIOnChangeCallback } from './types';
+import { GuiControllerOnChangeCallback, GuiData, GuiOnChangeCallback } from './types';
 
 export class GUIControllerWrapper {
   readonly id = 0;
@@ -9,8 +9,8 @@ export class GUIControllerWrapper {
   readonly property!: string;
   readonly initialValue!: any;
   readonly domElement!: HTMLElement;
-  readonly $name!: HTMLDivElement;
-  readonly $widget!: HTMLDivElement;
+  readonly $name!: HTMLElement;
+  readonly $widget!: HTMLElement;
   public $disable!: HTMLElement;
   public _name: string = '';
   public _disabled: boolean = false;
@@ -46,10 +46,10 @@ export class GUIControllerWrapper {
   public hide(_hide?: boolean) {
     return this;
   }
-  public onChange(_callback: GUIControllerOnChangeCallback) {
+  public onChange(_callback: GuiControllerOnChangeCallback) {
     return this;
   }
-  public onFinishChange(_callback: GUIControllerOnChangeCallback) {
+  public onFinishChange(_callback: GuiControllerOnChangeCallback) {
     return this;
   }
   public reset() {
@@ -130,11 +130,11 @@ export class GUIWrapper {
   public reset(_recursive?: boolean) {
     return this;
   }
-  public onChange(_callback: GUIOnChangeCallback) {
+  public onChange(_callback: GuiOnChangeCallback) {
     return this;
   }
   public callOnChange(_controller: GUIControllerWrapper) {}
-  public onFinishChange(_callback: GUIOnChangeCallback) {
+  public onFinishChange(_callback: GuiOnChangeCallback) {
     return this;
   }
   public callOnFinishChange(_controller: GUIControllerWrapper) {}
@@ -142,10 +142,10 @@ export class GUIWrapper {
     return this;
   }
   public callOnOpenClose(_gui: this) {}
-  public load(_data: GUIData, _recursive?: boolean) {
+  public load(_data: GuiData, _recursive?: boolean) {
     return this;
   }
-  public save(_recursive?: boolean): GUIData {
+  public save(_recursive?: boolean): GuiData {
     return { folders: {}, controllers: {} };
   }
   public controllersRecursive(): GUIControllerWrapper[] {

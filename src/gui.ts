@@ -11,7 +11,26 @@ import NumberController from './controllers/number-controller';
 import OptionController from './controllers/option-controller';
 import StringController from './controllers/string-controller';
 import stylesheet from './stylesheet';
-import { GUIData, GUIOnChangeCallback } from './types';
+import { GuiData, GuiOnChangeCallback, GuiOnOpenCloseCallback } from './types';
+
+export interface GUIParams {
+  // Add this GUI as a child in another GUI
+  parent?: GUI;
+  // Add this GUI to `document.body` and fix it to the top right of the page
+  autoPlace?: boolean;
+  // Add this GUI to this DOM element (overrides `autoPlace`)
+  container?: HTMLElement;
+  // Width of this GUI in pixels
+  // Note: You can make name labels wider in CSS with `.gui { ‑‑name‑width: 55% }`
+  width?: number;
+  // Name to display in the title bar
+  title?: string;
+  // Pass `true` to close all folders in this GUI by default
+  closeFolders?: boolean;
+  // Make controllers larger on touch devices
+  // Pass `false` to disable touch styles
+  touchStyles?: boolean;
+}
 
 /**
  * GUI folder that holds other folders and controllers
@@ -31,14 +50,9 @@ export default class GUI {
   readonly root: GUI;
 
   /**
-   * The folder containing this GUI, or `undefined` if this is the root GUI
+   * The GUI containing this GUI, or `undefined` if this is the root GUI
    */
   readonly parent?: GUI;
-
-  /**
-   * Used on the root GUI to determine if its descendants are closed by default, or `undefined` if this is not the root GUI
-   */
-  private _closeFolders?: boolean;
 
   /**
    * The list of folders and controllers contained by this GUI
@@ -58,32 +72,37 @@ export default class GUI {
   /**
    * The outermost container element
    */
-  readonly domElement: HTMLDivElement;
+  readonly domElement: HTMLElement;
 
   /**
    * The DOM element that contains the title
    */
-  readonly $title: HTMLDivElement;
+  readonly $title: HTMLElement;
 
   /**
    * The DOM element that contains children
    */
-  readonly $children: HTMLDivElement;
+  readonly $children: HTMLElement;
 
   /**
-   * The GUI's title
+   * this GUI's title
    * Use `gui.title(string)` to modify this value
    */
   public _title: string = '';
 
   /**
-   * Used to determine if the GUI is closed
+   * Used on the root GUI to determine if its descendants are closed by default, or `undefined` if this is not the root GUI
+   */
+  private _closeFolders?: boolean;
+
+  /**
+   * Used to determine if this GUI is closed
    * Use `gui.open()` or `gui.close()` to modify this value
    */
   public _closed: boolean = false;
 
   /**
-   * Used to determine if the GUI is hidden
+   * Used to determine if this GUI is hidden
    * Use `gui.show()` or `gui.hide()` to modify this value
    */
   public _hidden: boolean = false;
@@ -92,19 +111,19 @@ export default class GUI {
    * Used to access the function bound to `onChange` events
    * Use the `gui.onChange(callback)` to modify this value
    */
-  private _onChange?: GUIOnChangeCallback;
+  private _onChange?: GuiOnChangeCallback;
 
   /**
    * Used to access the function bound to `onFinishChange` events
    * Use the `gui.onFinishChange(callback)` to modify this value
    */
-  private _onFinishChange?: GUIOnChangeCallback;
+  private _onFinishChange?: GuiOnChangeCallback;
 
   /**
    * Used to access the function bound to `open` and `close` events
    * Use the `gui.onOpenClose(callback)` to modify this value
    */
-  private _onOpenClose?: (gui: GUI) => void;
+  private _onOpenClose?: GuiOnOpenCloseCallback;
 
   constructor({
     parent,
@@ -114,24 +133,7 @@ export default class GUI {
     title = 'Controls',
     closeFolders = false,
     touchStyles = true
-  }: {
-    // Add this GUI as a child in another GUI
-    parent?: GUI;
-    // Add the GUI to `document.body` and fix it to the top right of the page
-    autoPlace?: boolean;
-    // Add the GUI to this DOM element (overrides `autoPlace`)
-    container?: HTMLElement;
-    // Width of the GUI in pixels
-    // Note: You can make name labels wider in CSS with `.gui { ‑‑name‑width: 55% }`
-    width?: number;
-    // Name to display in the title bar
-    title?: string;
-    // Pass `true` to close all folders in this GUI by default
-    closeFolders?: boolean;
-    // Make controllers larger on touch devices
-    // Pass `false` to disable touch styles
-    touchStyles?: boolean;
-  } = {}) {
+  }: GUIParams = {}) {
     this.root = parent ? parent.root : this;
     this.parent = parent;
 
@@ -206,7 +208,7 @@ export default class GUI {
   /**
    * Change the title of this GUI
    *
-   * @param {string} title
+   * @param {string} title The title of this GUI
    * @returns {this}
    */
   public title(title: string): this {
@@ -218,16 +220,15 @@ export default class GUI {
   /**
    * Add a controller to this GUI
    *
-   * @param {object} object            The object the controller will modify
-   * @param {string} property          Name of the property to control
-   * @param {number|object|Array} [$1] Minimum value for number controllers / Set of selectable values for an option controller
-   * @param {number} [$2]              Maximum value for number controllers
-   * @param {number} [$3]              Step value for number controllers
+   * @param {object} object   The object the controller will modify
+   * @param {string} property Name of the property to control
+   * @param {any} [$1]
+   * @param {any} [$2]
+   * @param {any} [$3]
    * @returns {Controller}
    */
-  public add(object: object, property: string, $1?: any, $2?: number, $3?: number): Controller {
-    // @ts-ignore
-    const value = object[property];
+  public add(object: object, property: string, $1?: any, $2?: any, $3?: any): Controller {
+    const value: any = object[property as keyof object];
 
     if (Object($1) === $1 || Array.isArray($1)) {
       return new OptionController(this, object, property, $1 as object);
@@ -288,7 +289,7 @@ export default class GUI {
    * @param {string} property Name of the property to control
    * @param {number} [step]   Step value
    */
-  public addAngle(object: object, property: string, step?: number) {
+  public addAngle(object: object, property: string, step?: number): AngleController {
     return new AngleController(this, object, property, step);
   }
 
@@ -297,7 +298,7 @@ export default class GUI {
    *
    * @param {object} object   The object the controller will modify
    * @param {string} property Name of the property to control
-   * @param {string} [accept] Types the file input should accept
+   * @param {string} [accept] MIME type the file input should accept
    * @returns {FileController}
    */
   public addFile(object: object, property: string, accept?: string): FileController {
@@ -307,7 +308,7 @@ export default class GUI {
   /**
    * Add a folder to this GUI
    *
-   * @param {string} title Name to display in the folder's title bar
+   * @param {string} title Title to display in the folder's title bar
    * @returns {GUI}
    */
   public addFolder(title: string): GUI {
@@ -326,8 +327,7 @@ export default class GUI {
    * @param {number} [step]   Step value
    */
   public addVector(object: object, property: string, min?: number, max?: number, step?: number): GUI {
-    // @ts-ignore
-    const vector = object[property] as object;
+    const vector = object[property as keyof object] as object;
     const folder = this.addFolder(property);
     if (vector.hasOwnProperty('x')) this.add(vector, 'x', min, max, step);
     if (vector.hasOwnProperty('y')) this.add(vector, 'y', min, max, step);
@@ -337,7 +337,7 @@ export default class GUI {
   }
 
   /**
-   * Show the GUI after it's been hidden
+   * Show this GUI after it's been hidden
    *
    * @param {boolean} [show=true]
    * @returns {this}
@@ -349,7 +349,7 @@ export default class GUI {
   }
 
   /**
-   * Hide the GUI
+   * Hide this GUI
    *
    * @param {boolean} [hide=true]
    * @returns {this}
@@ -359,7 +359,7 @@ export default class GUI {
   }
 
   /**
-   * Open a GUI or folder
+   * Open this GUI
    *
    * @param {boolean} [open=true]
    * @returns {this}
@@ -372,7 +372,7 @@ export default class GUI {
   }
 
   /**
-   * Close the GUI
+   * Close this GUI
    *
    * @param {boolean} [close=true]
    * @returns {this}
@@ -381,7 +381,13 @@ export default class GUI {
     return this.open(!close);
   }
 
-  public openAnimated(open: boolean = true) {
+  /**
+   * Animate this GUI opening/closing
+   *
+   * @param {boolean} [open=true]
+   * @returns {this}
+   */
+  public openAnimated(open: boolean = true): this {
     this.setClosed(!open);
 
     this.$title.setAttribute('aria-expanded', String(!this._closed));
@@ -419,9 +425,9 @@ export default class GUI {
   }
 
   /**
-   * Resets all controllers to their initial values
+   * Reset all controllers to their initial values
    *
-   * @param {boolean} [recursive=true] Pass false to exclude folders descending from this GUI
+   * @param {boolean} [recursive=true] Pass `false` to exclude folders descending from this GUI
    * @returns {this}
    */
   public reset(recursive: boolean = true): this {
@@ -433,20 +439,20 @@ export default class GUI {
   /**
    * Pass a function to be called whenever a controller in this GUI changes
    *
-   * @param {Function} callback
+   * @param {Function} callback Function to call
    * @returns {this}
    */
-  public onChange(callback: GUIOnChangeCallback): this {
+  public onChange(callback: GuiOnChangeCallback): this {
     this._onChange = callback;
     return this;
   }
 
   /**
-   * Call the onChange methods of this GUI and its parent GUI
+   * Call the `gui.onChange()` methods of this GUI and its parent GUI
    *
    * @param {Controller} controller
    */
-  public callOnChange(controller: Controller) {
+  public callOnChange(controller: Controller): void {
     if (this.parent) {
       this.parent.callOnChange(controller);
     }
@@ -463,18 +469,20 @@ export default class GUI {
   /**
    * Pass a function to be called whenever a controller in this GUI has finished changing
    *
-   * @param {Function} callback
+   * @param {Function} callback Function to call
    * @returns {this}
    */
-  public onFinishChange(callback: GUIOnChangeCallback): this {
+  public onFinishChange(callback: GuiOnChangeCallback): this {
     this._onFinishChange = callback;
     return this;
   }
 
   /**
-   * Call the onFinishChange methods of this GUI and its parent GUI
+   * Call the `gui.onFinishChange()` methods of this GUI and its parent GUI
+   *
+   * @param {Controller} controller
    */
-  public callOnFinishChange(controller: Controller) {
+  public callOnFinishChange(controller: Controller): void {
     if (this.parent) {
       this.parent.callOnFinishChange(controller);
     }
@@ -491,20 +499,20 @@ export default class GUI {
   /**
    * Pass a function to be called when this GUI or its descendants are opened or closed
    *
-   * @param {Function} callback
+   * @param {Function} callback Function to call
    * @returns {this}
    */
-  public onOpenClose(callback: (gui: GUI) => void): this {
+  public onOpenClose(callback: GuiOnOpenCloseCallback): this {
     this._onOpenClose = callback;
     return this;
   }
 
   /**
-   * Call the onOpenClose methods of this GUI and its parent GUI
+   * Call the `gui.onOpenClose()` methods of this GUI and its parent GUI
    *
    * @param {GUI} gui
    */
-  public callOnOpenClose(gui: GUI) {
+  public callOnOpenClose(gui: GUI): void {
     if (this.parent) {
       this.parent.callOnOpenClose(gui);
     }
@@ -514,13 +522,13 @@ export default class GUI {
   }
 
   /**
-   * Recall values that were saved with `gui.save()`
+   * Re-call values that were saved with `gui.save()`
    *
    * @param {object} data              Object to load values from
-   * @param {boolean} [recursive=true] Pass false to exclude folders descending from this GUI
+   * @param {boolean} [recursive=true] Pass `false` to exclude folders descending from this GUI
    * @returns {this}
    */
-  public load(data: GUIData, recursive: boolean = true): this {
+  public load(data: GuiData, recursive: boolean = true): this {
     if (data.controllers) {
       this.controllers.forEach((controller) => {
         if (controller instanceof FileController || controller instanceof FunctionController) {
@@ -545,11 +553,11 @@ export default class GUI {
    * Return an object mapping controller names to values
    * The object can be passed to `gui.load()` to recall these values
    *
-   * @param {boolean} [recursive=true] Pass false to exclude folders descending from this GUI
+   * @param {boolean} [recursive=true] Pass `false` to exclude folders descending from this GUI
    * @returns {object}
    */
-  public save(recursive: boolean = true): GUIData {
-    const data: GUIData = { folders: {}, controllers: {} };
+  public save(recursive: boolean = true): GuiData {
+    const data: GuiData = { folders: {}, controllers: {} };
 
     this.controllers.forEach((controller) => {
       if (controller instanceof FileController || controller instanceof FunctionController) {
@@ -573,7 +581,7 @@ export default class GUI {
   }
 
   /**
-   * Return an array of folders contained by this GUI and its descendents
+   * Return an Array of folders contained by this GUI and its descendents
    *
    * @returns {GUI[]}
    */
@@ -584,7 +592,7 @@ export default class GUI {
   }
 
   /**
-   * Return an array of controllers contained by this GUI and its descendents
+   * Return an Array of controllers contained by this GUI and its descendents
    *
    * @returns {Controller[]}
    */
@@ -597,7 +605,7 @@ export default class GUI {
   /**
    * Destroy all DOM elements and event listeners associated with this GUI
    */
-  public destroy() {
+  public destroy(): void {
     if (this.parent) {
       this.parent.children.splice(this.parent.children.indexOf(this), 1);
       this.parent.folders.splice(this.parent.folders.indexOf(this), 1);

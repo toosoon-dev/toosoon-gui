@@ -1,5 +1,5 @@
 import GUI from '../gui';
-import { GUIControllerOnChangeCallback } from '../types';
+import { GuiControllerOnChangeCallback } from '../types';
 
 /**
  * GUI Controller abstract class
@@ -34,7 +34,7 @@ export default class GUIController<T = any> {
   readonly property: string;
 
   /**
-   * The value of `object[property]` when the controller was created
+   * The value of `object[property]` when this controller was created
    */
   readonly initialValue: T;
 
@@ -44,14 +44,14 @@ export default class GUIController<T = any> {
   readonly domElement: HTMLElement;
 
   /**
-   * The DOM element that contains the controller's name
+   * The DOM element that contains this controller's name
    */
-  readonly $name: HTMLDivElement;
+  readonly $name: HTMLElement;
 
   /**
-   * The DOM element that contains the controller's "widget" (which differs by controller type)
+   * The DOM element that contains this controller's widget (which differs by controller type)
    */
-  readonly $widget: HTMLDivElement;
+  readonly $widget: HTMLElement;
 
   /**
    * The DOM element that receives the disabled attribute when using disable()
@@ -59,25 +59,25 @@ export default class GUIController<T = any> {
   public $disable: HTMLElement;
 
   /**
-   * The controller's name
+   * This controller's name
    * Use `controller.name(string)` to modify this value
    */
   public _name: string = '';
 
   /**
-   * Used to determine if the controller is disabled
+   * Used to determine if this controller is disabled
    * Use `controller.disable(boolean)` to modify this value
    */
   public _disabled: boolean = false;
 
   /**
-   * Used to determine if the controller is hidden
+   * Used to determine if this controller is hidden
    * Use `controller.show()` or `controller.hide()` to modify this value
    */
   public _hidden: boolean = false;
 
   /**
-   * Used to determine if the controller value has changed
+   * Used to determine if this controller value has changed
    */
   public _changed: boolean = false;
 
@@ -85,22 +85,22 @@ export default class GUIController<T = any> {
    * Used to access the function bound to `onChange` events
    * Use the `controller.onChange(callback)` to modify this value
    */
-  protected _onChange?: GUIControllerOnChangeCallback<T>;
+  protected _onChange?: GuiControllerOnChangeCallback<T>;
 
   /**
    * Used to access the function bound to `onFinishChange` events
    * Use the `controller.onFinishChange(callback)` to modify this value
    */
-  protected _onFinishChange?: GUIControllerOnChangeCallback<T>;
+  protected _onFinishChange?: GuiControllerOnChangeCallback<T>;
 
   /**
-   * Used to determine if the controller is currently listening
+   * Used to determine if this controller is currently listening
    * Use `controller.listen(boolean)` to modify this value
    */
   protected _listening: boolean = false;
 
   /**
-   * Used to determine if the controller value has changed outside of the controller logic
+   * Used to determine if this controller value has changed outside of this controller logic
    */
   protected _listenPreviousValue?: T;
 
@@ -113,8 +113,8 @@ export default class GUIController<T = any> {
    * @param {GUI} parent                 The GUI that contains this controller
    * @param {object} object              The object this controller will modify
    * @param {string} property            The name of the property to control
-   * @param {string} [className='']      A className to add to the controller DOM Element
-   * @param {string} [elementType='div'] The tag name of the controller DOM Element
+   * @param {string} [className='']      A className to add to this controller DOM Element
+   * @param {string} [elementType='div'] The tag name of this controller DOM Element
    */
   constructor(parent: GUI, object: object, property: string, className: string = '', elementType: string = 'div') {
     this.id = GUIController.id++;
@@ -155,9 +155,9 @@ export default class GUIController<T = any> {
   }
 
   /**
-   * Set the name of the controller and its label in the GUI
+   * Set the name of this controller and its label in this GUI
    *
-   * @param {string} name
+   * @param {string} name The name of this controller
    * @returns {this}
    */
   public name(name: string): this {
@@ -214,10 +214,10 @@ export default class GUIController<T = any> {
    * Change this controller into a dropdown of options
    * Note: Calling this method on an option controller will simply update the options
    *
-   * @param {object} options
+   * @param {object} options Options object
    * @returns {GUIController}
    */
-  public options(options: object): GUIController | void {
+  public options(options: object): GUIController {
     const controller = this.parent.add(this.object, this.property, options);
     controller?.name(this._name);
     this.destroy();
@@ -249,9 +249,9 @@ export default class GUIController<T = any> {
   }
 
   /**
-   * Show the controller after it's been hidden
+   * Show this controller after it's been hidden
    *
-   * @param {boolean} show
+   * @param {boolean} [show=true]
    * @returns {this}
    */
   public show(show: boolean = true): this {
@@ -261,7 +261,7 @@ export default class GUIController<T = any> {
   }
 
   /**
-   * Hide the controller
+   * Hide this controller
    *
    * @param {boolean} [hide=true]
    * @returns {this}
@@ -273,20 +273,20 @@ export default class GUIController<T = any> {
   /**
    * Pass a function to be called whenever the value is modified by this controller
    * The function receives the new value as its first parameter
-   * The value of `this` will be the controller
+   * The value of `this` will be this controller
    *
-   * @param {Function} callback
+   * @param {Function} callback Function to call
    * @returns {this}
    */
-  public onChange(callback: GUIControllerOnChangeCallback<T>): this {
+  public onChange(callback: GuiControllerOnChangeCallback<T>): this {
     this._onChange = callback;
     return this;
   }
 
   /**
-   * Call the onChange methods of this controller and its parent GUI
+   * Call the `onChange()` methods of this controller and its parent GUI
    */
-  protected callOnChange() {
+  protected callOnChange(): void {
     this.parent.callOnChange(this);
 
     if (typeof this._onChange !== 'undefined') {
@@ -299,16 +299,16 @@ export default class GUIController<T = any> {
   /**
    * Pass a function to be called after this controller has been modified and loses focus
    *
-   * @param {Function} callback
+   * @param {Function} callback Function to call
    * @returns {this}
    */
-  public onFinishChange(callback: GUIControllerOnChangeCallback<T>): this {
+  public onFinishChange(callback: GuiControllerOnChangeCallback<T>): this {
     this._onFinishChange = callback;
     return this;
   }
 
   /**
-   * Call the onFinishChange methods of this controller and its parent GUI
+   * Call the `onFinishChange()` methods of this controller and its parent GUI
    */
   protected callOnFinishChange() {
     if (this._changed) {
@@ -322,7 +322,7 @@ export default class GUIController<T = any> {
   }
 
   /**
-   * Sets the controller back to its initial value
+   * Set this controller back to its initial value
    *
    * @returns {this}
    */
@@ -371,14 +371,13 @@ export default class GUIController<T = any> {
    * @returns {any}
    */
   public getValue(): T {
-    // @ts-ignore
-    return this.object[this.property];
+    return this.object[this.property as keyof object] as T;
   }
 
   /**
    * Set the value of `object[property]`
    *
-   * @param {any} value
+   * @param {any} value The controller value
    * @returns {this}
    */
   public setValue(value: T): this {
@@ -401,7 +400,7 @@ export default class GUIController<T = any> {
   /**
    * Set the value of `object[property]` and call `callOnFinishChange()`
    *
-   * @param {any} value
+   * @param {any} value The controller value
    * @returns {this}
    */
   public load(value: T): this {
@@ -422,7 +421,7 @@ export default class GUIController<T = any> {
   /**
    * Destroy this controller and remove it from the parent GUI
    */
-  public destroy() {
+  public destroy(): void {
     this.listen(false);
     this.parent.children.splice(this.parent.children.indexOf(this), 1);
     this.parent.controllers.splice(this.parent.controllers.indexOf(this), 1);
