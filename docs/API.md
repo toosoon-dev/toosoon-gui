@@ -121,7 +121,7 @@ system.$children: readonly HTMLElement;
 
 Change the title of the GUI.
 
-`title`: The title of the GUI.
+- `title`: The title of the GUI.
 
 ```ts
 gui.title(title: string) => this;
@@ -131,9 +131,9 @@ gui.title(title: string) => this;
 
 Add a controller to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
-`[$1] [$2] [$3]`: Parameters depending on the controller's type. See [controllers types](#controllers-types) for more details.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
+- `[$1] [$2] [$3]`: Parameters depending on the controller's type. See [controllers types](#controllers-types) for more details.
 
 ```ts
 gui.add(object: object, property: string, $1?: any, $2?: number, $3?: number) => void;
@@ -143,8 +143,8 @@ gui.add(object: object, property: string, $1?: any, $2?: number, $3?: number) =>
 
 Add a controller to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
 
 ```ts
 gui.addColor(object: object, property: string) => ColorController;
@@ -154,11 +154,11 @@ gui.addColor(object: object, property: string) => ColorController;
 
 Add a 2D coords controller to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
-`[min]`: Minimum value.
-`[max]`: Maximum value.
-`[step]`: Step value.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
+- `[min]`: Minimum value.
+- `[max]`: Maximum value.
+- `[step]`: Step value.
 
 ```ts
 gui.addCoords(object: object, property: string, min?: number, max?: number, step?: number) => CoordsController
@@ -168,9 +168,9 @@ gui.addCoords(object: object, property: string, min?: number, max?: number, step
 
 Add an angle controller to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
-`[step]`: Step value.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
+- `[step]`: Step value.
 
 ```ts
 gui.addAngle(object: object, property: string, step?: number) => AngleController;
@@ -180,9 +180,9 @@ gui.addAngle(object: object, property: string, step?: number) => AngleController
 
 Add a file controller to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
-`[accept]`: MIME type the file input should accept.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
+- `[accept]`: MIME type the file input should accept.
 
 ```ts
 gui.addFile(object: object, property: string, accept?: string) => FileController;
@@ -192,7 +192,7 @@ gui.addFile(object: object, property: string, accept?: string) => FileController
 
 Add a folder to the GUI.
 
-`title`: Title to display in the folder's title bar.
+- `title`: Title to display in the folder's title bar.
 
 ```ts
 gui.addFolder(title: string) => GUI;
@@ -202,11 +202,11 @@ gui.addFolder(title: string) => GUI;
 
 Add a vector folder to the GUI.
 
-`object`: The object the controller will modify.
-`property`: Name of the property to control.
-`[min]`: Minimum value.
-`[max]`: Maximum value.
-`[step]`: Step value.
+- `object`: The object the controller will modify.
+- `property`: Name of the property to control.
+- `[min]`: Minimum value.
+- `[max]`: Maximum value.
+- `[step]`: Step value.
 
 ```ts
 gui.addVector(object: object, property: string, min?: number, max?: number, step?: number) => GUI
@@ -216,7 +216,7 @@ gui.addVector(object: object, property: string, min?: number, max?: number, step
 
 Show the GUI after it's been hidden.
 
-`[show=true]`
+- `[show=true]`
 
 ```ts
 gui.show(show?: boolean) => this;
@@ -226,7 +226,7 @@ gui.show(show?: boolean) => this;
 
 Hide the GUI.
 
-`[hide=true]`
+- `[hide=true]`
 
 ```ts
 gui.hide(hide?: boolean) => this;
@@ -236,7 +236,7 @@ gui.hide(hide?: boolean) => this;
 
 Open the GUI.
 
-`[open=true]`
+- `[open=true]`
 
 ```ts
 gui.open(open?: boolean) => this;
@@ -246,7 +246,7 @@ gui.open(open?: boolean) => this;
 
 Close the GUI.
 
-`[close=true]`
+- `[close=true]`
 
 ```ts
 gui.close(close?: boolean) => this;
@@ -256,7 +256,7 @@ gui.close(close?: boolean) => this;
 
 Animate the GUI opening/closing.
 
-`[open=true]`
+- `[open=true]`
 
 ```ts
 gui.openAnimated(open?: boolean) => this;
@@ -266,7 +266,7 @@ gui.openAnimated(open?: boolean) => this;
 
 Reset all controllers to their initial values.
 
-`[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
+- `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
 gui.reset(recursive?: boolean) => this;
@@ -276,7 +276,7 @@ gui.reset(recursive?: boolean) => this;
 
 Pass a function to be called whenever a controller in the GUI changes.
 
-`callback`: Function to call.
+- `callback`: Function to call.
 
 ```ts
 gui.onChange(callback: Function) => this;
@@ -286,7 +286,7 @@ gui.onChange(callback: Function) => this;
 
 Pass a function to be called whenever a controller in the GUI has finished changing.
 
-`callback`: Function to call.
+- `callback`: Function to call.
 
 ```ts
 gui.onFinishChange(callback: Function) => this;
@@ -296,7 +296,7 @@ gui.onFinishChange(callback: Function) => this;
 
 Pass a function to be called when the GUI or its descendants are opened or closed.
 
-`callback`: Function to call.
+- `callback`: Function to call.
 
 ```ts
 gui.onOpenClose(callback: Function) => this;
@@ -306,8 +306,8 @@ gui.onOpenClose(callback: Function) => this;
 
 Re-call values that were saved with `save()`.
 
-`data`: Object to load values from.
-`[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
+- `data`: Object to load values from.
+- `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
 gui.load(data: object, recursive?: boolean) => this;
@@ -317,7 +317,7 @@ gui.load(data: object, recursive?: boolean) => this;
 
 Return an object mapping controller names to values. The object can be passed to `load()` to recall these values.
 
-`[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
+- `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
 gui.save(recursive?: boolean) => object;
@@ -463,7 +463,7 @@ controller.$disable: readonly HTMLElement;
 
 Set the name of this controller and its label in the GUI.
 
-`name`: The name of the controller.
+- `name`: The name of the controller.
 
 ```ts
 gui.name(name: string) => this;
@@ -473,7 +473,7 @@ gui.name(name: string) => this;
 
 Change the controller into a dropdown of options. Calling this method on an option controller will simply update the options.
 
-`options`: Options object.
+- `options`: Options object.
 
 ```ts
 gui.options(options: object) => GUIController;
@@ -483,7 +483,7 @@ gui.options(options: object) => GUIController;
 
 Enable the controller.
 
-`[enabled=true]`
+- `[enabled=true]`
 
 ```ts
 gui.enable(enabled?: boolean) => this;
@@ -493,7 +493,7 @@ gui.enable(enabled?: boolean) => this;
 
 Disable the controller.
 
-`[disabled=true]`
+- `[disabled=true]`
 
 ```ts
 gui.disable(disabled?: boolean) => this;
@@ -503,7 +503,7 @@ gui.disable(disabled?: boolean) => this;
 
 Show the controller after it's been hidden.
 
-`[show=true]`
+- `[show=true]`
 
 ```ts
 gui.show(show?: boolean) => this;
@@ -513,7 +513,7 @@ gui.show(show?: boolean) => this;
 
 Hide the controller.
 
-`[hide=true]`
+- `[hide=true]`
 
 ```ts
 gui.hide(hide?: boolean) => this;
@@ -524,7 +524,7 @@ gui.hide(hide?: boolean) => this;
 Pass a function to be called whenever the value is modified by the controller.
 The function receives the new value as its first parameter and the value of `this` will be the controller.
 
-`callback`: Function to call.
+- `callback`: Function to call.
 
 ```ts
 gui.onChange(callback: Function) => this;
@@ -534,7 +534,7 @@ gui.onChange(callback: Function) => this;
 
 Pass a function to be called after the controller has been modified and loses focus.
 
-`callback`: Function to call.
+- `callback`: Function to call.
 
 ```ts
 gui.onFinishChange(callback: Function) => this;
@@ -552,7 +552,7 @@ gui.reset() => this;
 
 Listen for value updates.
 
-`[listen=true]`
+- `[listen=true]`
 
 ```ts
 gui.listen(listen?: boolean) => this;
@@ -570,7 +570,7 @@ gui.getValue() => any;
 
 Set the value of `object[property]`.
 
-`value`: The controller value.
+- `value`: The controller value.
 
 ```ts
 gui.setValue(value: any) => this;
@@ -588,7 +588,7 @@ gui.updateDisplay() => this;
 
 Set the value of `object[property]` and call `callOnFinishChange()`.
 
-`value`: The controller value.
+- `value`: The controller value.
 
 ```ts
 gui.load(value: any) => this;
