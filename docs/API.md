@@ -349,8 +349,6 @@ gui.destroy() => void;
 
 ## Controller
 
-Abstract class that represents a given property of an object.
-
 - Controller
 
   - [.id](#controller-id): `number`

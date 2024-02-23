@@ -1,8 +1,6 @@
 # TOOSOON GUI
 
-TOOSOON controller library.
-
-This library provides functionalities for manipulating variables and fire functions on the fly.
+Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly.
 
 **Credits**: [dat.gui](https://github.com/dataarts/dat.gui)
 

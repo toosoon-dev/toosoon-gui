@@ -6,6 +6,7 @@ import { GuiControllerOnChangeCallback } from '../types';
  *
  * @exports
  * @class GUIController
+ * @abstract
  */
 export default class GUIController<T = any> {
   /**
