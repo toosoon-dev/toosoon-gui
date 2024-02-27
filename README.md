@@ -18,6 +18,28 @@ NPM:
 $ npm install toosoon-gui
 ```
 
+## Documentation
+
+### Usage
+
+#### Basic
+
+```ts
+import GUI from 'toosoon-gui';
+
+const gui = new GUI({ title: 'Settings' });
+```
+
+#### GUI Wrapper
+
+The `GUIWrapper` class allows you to create a fake instance of `GUI`. This is helpful when you need to remove the GUI features on some environments.
+
+```ts
+import GUI, { Gui, GUIWrapper } from 'toosoon-gui';
+
+const gui: Gui = DEBUG ? new GUI() : new GUIWrapper();
+```
+
 ## API
 
 See full documentation [here](./docs/API.md).

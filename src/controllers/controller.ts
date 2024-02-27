@@ -114,7 +114,7 @@ export default class GUIController<T = any> {
    * @param {GUI} parent                 The GUI that contains this controller
    * @param {object} object              The object this controller will modify
    * @param {string} property            The name of the property to control
-   * @param {string} [className='']      A className to add to this controller DOM Element
+   * @param {string} [className='']      A `className` to add to this controller DOM Element
    * @param {string} [elementType='div'] The tag name of this controller DOM Element
    */
   constructor(parent: GUI, object: object, property: string, className: string = '', elementType: string = 'div') {

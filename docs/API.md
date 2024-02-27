@@ -4,7 +4,7 @@
 
 GUI folder that holds other folders and controllers.
 
-- [new GUI(parameters)](#parameters)
+- [new GUI(parameters)](#gui-constructor)
   - [.root](#gui-root): `GUI`
   - [.parent](#gui-parent): `GUI`
   - [.children](#gui-children): `Array<GUI | Controller>`
@@ -36,7 +36,7 @@ GUI folder that holds other folders and controllers.
   - [.controllersRecursive()](#gui-controllers-recursive-method): `Controller[]`
   - [.destroy()](#gui-destroy-method)
 
-### Parameters
+### Constructor <a id="gui-constructor"></a>
 
 | Parameter                 | Type          | Default      | Description                                                             |
 | ------------------------- | ------------- | ------------ | ----------------------------------------------------------------------- |
@@ -56,7 +56,7 @@ GUI folder that holds other folders and controllers.
 The top level GUI containing the GUI, or `this` if it is the root GUI.
 
 ```ts
-gui.root: readonly GUI;
+GUI.root: readonly GUI;
 ```
 
 ##### parent <a id="gui-parent"></a>
@@ -64,7 +64,7 @@ gui.root: readonly GUI;
 The GUI containing this GUI, or `undefined` if it is the root GUI.
 
 ```ts
-gui.parent?: readonly GUI;
+GUI.parent?: readonly GUI;
 ```
 
 ##### children <a id="gui-children"></a>
@@ -72,7 +72,7 @@ gui.parent?: readonly GUI;
 The list of folders and controllers contained by the GUI.
 
 ```ts
-gui.children: readonly Array<GUI | Controller>;
+GUI.children: readonly Array<GUI | Controller>;
 ```
 
 ##### folders <a id="gui-folders"></a>
@@ -80,7 +80,7 @@ gui.children: readonly Array<GUI | Controller>;
 The list of folders contained by the GUI.
 
 ```ts
-gui.folders: readonly GUI[];
+GUI.folders: readonly GUI[];
 ```
 
 ##### controllers <a id="gui-controllers"></a>
@@ -88,7 +88,7 @@ gui.folders: readonly GUI[];
 The list of controllers contained by the GUI.
 
 ```ts
-gui.controllers: readonly Controller[];
+GUI.controllers: readonly Controller[];
 ```
 
 ##### domElement <a id="gui-dom"></a>
@@ -96,7 +96,7 @@ gui.controllers: readonly Controller[];
 The outermost container element.
 
 ```ts
-gui.domElement: readonly HTMLElement;
+GUI.domElement: readonly HTMLElement;
 ```
 
 ##### $title <a id="gui-title-1"></a>
@@ -104,7 +104,7 @@ gui.domElement: readonly HTMLElement;
 The DOM element that contains the title.
 
 ```ts
-gui.$title: readonly HTMLElement;
+GUI.$title: readonly HTMLElement;
 ```
 
 ##### $children <a id="gui-children-1"></a>
@@ -124,7 +124,7 @@ Change the title of the GUI.
 - `title`: The title of the GUI.
 
 ```ts
-gui.title(title: string) => this;
+GUI.title(title: string) => this;
 ```
 
 ##### add(object, property) <a id="gui-add-method"></a>
@@ -136,7 +136,7 @@ Add a controller to the GUI.
 - `[$1] [$2] [$3]`: Parameters depending on the controller's type. See [controllers types](#controllers-types) for more details.
 
 ```ts
-gui.add(object: object, property: string, $1?: any, $2?: number, $3?: number) => void;
+GUI.add(object: object, property: string, $1?: any, $2?: number, $3?: number): void;
 ```
 
 ##### addColor(object, property) <a id="gui-add-color-method"></a>
@@ -147,7 +147,7 @@ Add a controller to the GUI.
 - `property`: Name of the property to control.
 
 ```ts
-gui.addColor(object: object, property: string) => ColorController;
+GUI.addColor(object: object, property: string): ColorController;
 ```
 
 ##### addCoords(object, property) <a id="gui-add-coords-method"></a>
@@ -161,7 +161,7 @@ Add a 2D coords controller to the GUI.
 - `[step]`: Step value.
 
 ```ts
-gui.addCoords(object: object, property: string, min?: number, max?: number, step?: number) => CoordsController
+GUI.addCoords(object: object, property: string, min?: number, max?: number, step?: number): CoordsController
 ```
 
 ##### addAngle(object, property) <a id="gui-add-angle-method"></a>
@@ -173,7 +173,7 @@ Add an angle controller to the GUI.
 - `[step]`: Step value.
 
 ```ts
-gui.addAngle(object: object, property: string, step?: number) => AngleController;
+GUI.addAngle(object: object, property: string, step?: number): AngleController;
 ```
 
 ##### addFile(object, property) <a id="gui-add-file-method"></a>
@@ -185,7 +185,7 @@ Add a file controller to the GUI.
 - `[accept]`: MIME type the file input should accept.
 
 ```ts
-gui.addFile(object: object, property: string, accept?: string) => FileController;
+GUI.addFile(object: object, property: string, accept?: string): FileController;
 ```
 
 ##### addFolder(title) <a id="gui-add-folder-method"></a>
@@ -195,7 +195,7 @@ Add a folder to the GUI.
 - `title`: Title to display in the folder's title bar.
 
 ```ts
-gui.addFolder(title: string) => GUI;
+GUI.addFolder(title: string): GUI;
 ```
 
 ##### addVector(object, property) <a id="gui-add-vector-method"></a>
@@ -209,7 +209,7 @@ Add a vector folder to the GUI.
 - `[step]`: Step value.
 
 ```ts
-gui.addVector(object: object, property: string, min?: number, max?: number, step?: number) => GUI
+GUI.addVector(object: object, property: string, min?: number, max?: number, step?: number): GUI
 ```
 
 ##### show() <a id="gui-show-method"></a>
@@ -219,7 +219,7 @@ Show the GUI after it's been hidden.
 - `[show=true]`
 
 ```ts
-gui.show(show?: boolean) => this;
+GUI.show(show?: boolean): this;
 ```
 
 ##### hide() <a id="gui-hide-method"></a>
@@ -229,7 +229,7 @@ Hide the GUI.
 - `[hide=true]`
 
 ```ts
-gui.hide(hide?: boolean) => this;
+GUI.hide(hide?: boolean): this;
 ```
 
 ##### open() <a id="gui-open-method"></a>
@@ -239,7 +239,7 @@ Open the GUI.
 - `[open=true]`
 
 ```ts
-gui.open(open?: boolean) => this;
+GUI.open(open?: boolean): this;
 ```
 
 ##### close() <a id="gui-close-method"></a>
@@ -249,7 +249,7 @@ Close the GUI.
 - `[close=true]`
 
 ```ts
-gui.close(close?: boolean) => this;
+GUI.close(close?: boolean): this;
 ```
 
 ##### openAnimated() <a id="gui-open-animated-method"></a>
@@ -259,7 +259,7 @@ Animate the GUI opening/closing.
 - `[open=true]`
 
 ```ts
-gui.openAnimated(open?: boolean) => this;
+GUI.openAnimated(open?: boolean): this;
 ```
 
 ##### reset() <a id="gui-reset-method"></a>
@@ -269,7 +269,7 @@ Reset all controllers to their initial values.
 - `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
-gui.reset(recursive?: boolean) => this;
+GUI.reset(recursive?: boolean): this;
 ```
 
 ##### onChange(callback) <a id="gui-on-change-method"></a>
@@ -279,7 +279,7 @@ Pass a function to be called whenever a controller in the GUI changes.
 - `callback`: Function to call.
 
 ```ts
-gui.onChange(callback: Function) => this;
+GUI.onChange(callback: Function): this;
 ```
 
 ##### onFinishChange(callback) <a id="gui-on-finish-change-method"></a>
@@ -289,7 +289,7 @@ Pass a function to be called whenever a controller in the GUI has finished chang
 - `callback`: Function to call.
 
 ```ts
-gui.onFinishChange(callback: Function) => this;
+GUI.onFinishChange(callback: Function): this;
 ```
 
 ##### onOpenClose(callback) <a id="gui-on-open-close-method"></a>
@@ -299,7 +299,7 @@ Pass a function to be called when the GUI or its descendants are opened or close
 - `callback`: Function to call.
 
 ```ts
-gui.onOpenClose(callback: Function) => this;
+GUI.onOpenClose(callback: Function): this;
 ```
 
 ##### load(data) <a id="gui-load-method"></a>
@@ -310,7 +310,7 @@ Re-call values that were saved with `save()`.
 - `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
-gui.load(data: object, recursive?: boolean) => this;
+GUI.load(data: object, recursive?: boolean): this;
 ```
 
 ##### save() <a id="gui-save-method"></a>
@@ -320,7 +320,7 @@ Return an object mapping controller names to values. The object can be passed to
 - `[recursive=true]`: Pass `false` to exclude folders descending from the GUI.
 
 ```ts
-gui.save(recursive?: boolean) => object;
+GUI.save(recursive?: boolean): object;
 ```
 
 ##### foldersRecursive() <a id="gui-folders-recursive-method"></a>
@@ -328,7 +328,7 @@ gui.save(recursive?: boolean) => object;
 Return an Array of folders contained by the GUI and its descendents.
 
 ```ts
-gui.foldersRecursive() => GUI[];
+GUI.foldersRecursive(): GUI[];
 ```
 
 ##### controllersRecursive() <a id="gui-controllers-recursive-method"></a>
@@ -336,7 +336,7 @@ gui.foldersRecursive() => GUI[];
 Return an Array of controllers contained by the GUI and its descendents.
 
 ```ts
-gui.controllersRecursive() => Controller[];
+GUI.controllersRecursive(): Controller[];
 ```
 
 ##### destroy() <a id="gui-destroy-method"></a>
@@ -344,13 +344,12 @@ gui.controllersRecursive() => Controller[];
 Destroy all DOM elements and event listeners associated with the GUI.
 
 ```ts
-gui.destroy() => void;
+GUI.destroy(): void;
 ```
 
 ## Controller
 
-- Controller
-
+- [new Controller(parent, object, property)](#controller-constructor)
   - [.id](#controller-id): `number`
   - [.parent](#controller-parent): `GUI`
   - [.object](#controller-object): `object`
@@ -381,6 +380,16 @@ gui.destroy() => void;
   - [.save()](#controller-save-method): `any`
   - [.destroy()](#controller-destroy-method): `this`
 
+### Constructor <a id="controller-constructor"></a>
+
+| Parameter   | Type     | Default | Description                                          |
+| ----------- | -------- | ------- | ---------------------------------------------------- |
+| parent      | `GUI`    |         | The GUI that contains the controller.                |
+| object      | `object` |         | The object the controller will modify.               |
+| property    | `string` |         | The name of the property to control.                 |
+| className   | `string` | `''`    | A `className` to add to this controller DOM Element. |
+| elementType | `string` | `'div'` | The tag name of the controller DOM Element.          |
+
 ### Properties
 
 ##### id <a id="controller-id"></a>
@@ -388,7 +397,7 @@ gui.destroy() => void;
 Unique identifier of an instance of `Controller`.
 
 ```ts
-controller.id: readonly number;
+Controller.id: readonly number;
 ```
 
 ##### parent <a id="controller-parent"></a>
@@ -396,7 +405,7 @@ controller.id: readonly number;
 The GUI that contains the controller.
 
 ```ts
-controller.parent: readonly GUI;
+Controller.parent: readonly GUI;
 ```
 
 ##### object <a id="controller-object"></a>
@@ -404,7 +413,7 @@ controller.parent: readonly GUI;
 The object this controller will modify.
 
 ```ts
-controller.object: readonly object;
+Controller.object: readonly object;
 ```
 
 ##### property <a id="controller-property"></a>
@@ -412,7 +421,7 @@ controller.object: readonly object;
 The name of the property to control.
 
 ```ts
-controller.property: readonly string;
+Controller.property: readonly string;
 ```
 
 ##### initialValue <a id="controller-initial-value"></a>
@@ -420,7 +429,7 @@ controller.property: readonly string;
 The value of `object[property]` when the controller was created.
 
 ```ts
-controller.initialValue: readonly any;
+Controller.initialValue: readonly any;
 ```
 
 ##### domElement <a id="controller-domElement"></a>
@@ -428,7 +437,7 @@ controller.initialValue: readonly any;
 The outermost container DOM element for the controller.
 
 ```ts
-controller.domElement: readonly HTMLElement;
+Controller.domElement: readonly HTMLElement;
 ```
 
 ##### $name <a id="controller-name"></a>
@@ -436,7 +445,7 @@ controller.domElement: readonly HTMLElement;
 The DOM element that contains the controller's name.
 
 ```ts
-controller.$name: readonly HTMLElement;
+Controller.$name: readonly HTMLElement;
 ```
 
 ##### $widget <a id="controller-widget"></a>
@@ -444,7 +453,7 @@ controller.$name: readonly HTMLElement;
 The DOM element that contains the controller's widget (which differs by controller type).
 
 ```ts
-controller.$widget: readonly HTMLElement;
+Controller.$widget: readonly HTMLElement;
 ```
 
 ##### $disable <a id="controller-disable"></a>
@@ -452,7 +461,7 @@ controller.$widget: readonly HTMLElement;
 The DOM element that receives the disabled attribute when using `disable()`.
 
 ```ts
-controller.$disable: readonly HTMLElement;
+Controller.$disable: readonly HTMLElement;
 ```
 
 ### Methods
@@ -464,7 +473,7 @@ Set the name of this controller and its label in the GUI.
 - `name`: The name of the controller.
 
 ```ts
-gui.name(name: string) => this;
+Controller.name(name: string): this;
 ```
 
 ##### options() <a id="controller-options-method"></a>
@@ -474,7 +483,7 @@ Change the controller into a dropdown of options. Calling this method on an opti
 - `options`: Options object.
 
 ```ts
-gui.options(options: object) => GUIController;
+Controller.options(options: object): GUIController;
 ```
 
 ##### enable() <a id="controller-enable-method"></a>
@@ -484,7 +493,7 @@ Enable the controller.
 - `[enabled=true]`
 
 ```ts
-gui.enable(enabled?: boolean) => this;
+Controller.enable(enabled?: boolean): this;
 ```
 
 ##### disable() <a id="controller-disable-method"></a>
@@ -494,7 +503,7 @@ Disable the controller.
 - `[disabled=true]`
 
 ```ts
-gui.disable(disabled?: boolean) => this;
+Controller.disable(disabled?: boolean): this;
 ```
 
 ##### show() <a id="controller-show-method"></a>
@@ -504,7 +513,7 @@ Show the controller after it's been hidden.
 - `[show=true]`
 
 ```ts
-gui.show(show?: boolean) => this;
+Controller.show(show?: boolean): this;
 ```
 
 ##### hide() <a id="controller-hide-method"></a>
@@ -514,7 +523,7 @@ Hide the controller.
 - `[hide=true]`
 
 ```ts
-gui.hide(hide?: boolean) => this;
+Controller.hide(hide?: boolean): this;
 ```
 
 ##### onChange() <a id="controller-on-change-method"></a>
@@ -525,7 +534,7 @@ The function receives the new value as its first parameter and the value of `thi
 - `callback`: Function to call.
 
 ```ts
-gui.onChange(callback: Function) => this;
+Controller.onChange(callback: Function): this;
 ```
 
 ##### onFinishChange() <a id="controller-on-finish-change-method"></a>
@@ -535,7 +544,7 @@ Pass a function to be called after the controller has been modified and loses fo
 - `callback`: Function to call.
 
 ```ts
-gui.onFinishChange(callback: Function) => this;
+Controller.onFinishChange(callback: Function): this;
 ```
 
 ##### reset() <a id="controller-reset-method"></a>
@@ -543,7 +552,7 @@ gui.onFinishChange(callback: Function) => this;
 Set the controller back to its initial value.
 
 ```ts
-gui.reset() => this;
+Controller.reset(): this;
 ```
 
 ##### listen() <a id="controller-listen-method"></a>
@@ -553,7 +562,7 @@ Listen for value updates.
 - `[listen=true]`
 
 ```ts
-gui.listen(listen?: boolean) => this;
+Controller.listen(listen?: boolean): this;
 ```
 
 ##### getValue() <a id="controller-get-value-method"></a>
@@ -561,7 +570,7 @@ gui.listen(listen?: boolean) => this;
 Return `object[property]` value.
 
 ```ts
-gui.getValue() => any;
+Controller.getValue(): any;
 ```
 
 ##### setValue() <a id="controller-set-value-method"></a>
@@ -571,7 +580,7 @@ Set the value of `object[property]`.
 - `value`: The controller value.
 
 ```ts
-gui.setValue(value: any) => this;
+Controller.setValue(value: any): this;
 ```
 
 ##### updateDisplay() <a id="controller-update-display-method"></a>
@@ -579,7 +588,7 @@ gui.setValue(value: any) => this;
 Update the display to keep it in sync with the current value.
 
 ```ts
-gui.updateDisplay() => this;
+Controller.updateDisplay(): this;
 ```
 
 ##### load() <a id="controller-load-method"></a>
@@ -589,7 +598,7 @@ Set the value of `object[property]` and call `callOnFinishChange()`.
 - `value`: The controller value.
 
 ```ts
-gui.load(value: any) => this;
+Controller.load(value: any): this;
 ```
 
 ##### save() <a id="controller-save-method"></a>
@@ -597,7 +606,7 @@ gui.load(value: any) => this;
 Return controller value.
 
 ```ts
-gui.save() => any;
+Controller.save(): any;
 ```
 
 ##### destroy() <a id="controller-destroy-method"></a>
@@ -605,7 +614,7 @@ gui.save() => any;
 Destroy the controller and remove it from the parent GUI.
 
 ```ts
-gui.destroy() => void;
+Controller.destroy(): void;
 ```
 
 ### Controllers types
@@ -666,7 +675,7 @@ gui.add(config, 'option').options(options);
 GUI Controller for functions.
 
 ```ts
-gui.add({ doSomething: () => console.log('done') }, 'doSomething');
+GUI.add({ doSomething: () => console.log('done') }, 'doSomething');
 ```
 
 #### Angle Controller
@@ -721,24 +730,4 @@ function onLoad(dataURL: string) {
 }
 
 gui.addFile({ onLoad }, 'onLoad', 'image/*');
-```
-
-## Usage
-
-### Basic
-
-```ts
-import GUI from 'toosoon-gui';
-
-const gui = new GUI({ title: 'Settings' });
-```
-
-### GUI Wrapper
-
-The `GUIWrapper` class allows you to create a fake instance of `GUI`. This is helpful when you need to remove the GUI features on some environments.
-
-```ts
-import GUI, { Gui, GUIWrapper } from 'toosoon-gui';
-
-const gui: Gui = DEBUG ? new GUI() : new GUIWrapper();
 ```
