@@ -112,7 +112,7 @@ GUI.$title: readonly HTMLElement;
 The DOM element that contains children.
 
 ```ts
-system.$children: readonly HTMLElement;
+GUI.$children: readonly HTMLElement;
 ```
 
 ### Methods
