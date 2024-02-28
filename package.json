@@ -1,7 +1,7 @@
 {
   "name": "toosoon-gui",
   "version": "1.2.1",
-  "description": "Graphical user interface (GUI) library library",
+  "description": "Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly",
   "main": "./lib/index.js",
   "scripts": {
     "build": "npx tsc",
