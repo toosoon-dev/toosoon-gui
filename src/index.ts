@@ -11,4 +11,5 @@ export { default as StringController } from './controllers/string-controller';
 export { GUIControllerWrapper, GUIWrapper } from './wrapper';
 
 export { default } from './gui';
+
 export type * from './types';

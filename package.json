@@ -1,8 +1,9 @@
 {
   "name": "toosoon-gui",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly",
   "main": "./lib/index.js",
+  "types": "./lib/types.d.ts",
   "scripts": {
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
