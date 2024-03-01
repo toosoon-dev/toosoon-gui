@@ -18,6 +18,6 @@ export type GuiControllerOnChangeCallback<T = any> = (value: T) => void;
 export type GuiOnOpenCloseCallback = (gui: Gui) => void;
 
 export interface GuiData {
-  folders: { [title: string]: any };
-  controllers: { [name: string]: any };
+  folders: Record<string, any>;
+  controllers: Record<string, any>;
 }
