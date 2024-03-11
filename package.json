@@ -1,7 +1,11 @@
 {
   "name": "toosoon-gui",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
