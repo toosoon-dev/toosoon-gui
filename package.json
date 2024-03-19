@@ -1,6 +1,6 @@
 {
   "name": "toosoon-gui",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly",
   "type": "module",
   "engines": {
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/toosoon-dev/toosoon-gui#readme",
   "dependencies": {
-    "toosoon-utils": "^2.2.0"
+    "toosoon-utils": "^2.3.0"
   },
   "devDependencies": {
     "typescript": "^5.4.2"
