@@ -1,4 +1,4 @@
-# TOOSOON GUI
+# TOOSOON GUI [DEPRECATED]
 
 Graphical user interface (GUI) library providing functionalities for manipulating variables and fire functions on the fly.
 
